@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from play.models import Row
-from play.models import Card
+from play.models import Row, Card, BingoBoard
 """
 Form the JSON that we need
 """
@@ -8,14 +7,6 @@ class RowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Row
         fields = ['b', 'i', 'n', 'g', 'o', 'card']
-
-class CardSerializer(serializers.ModelSerializer):
-    rows = serializers.StringRelatedField(many=True)
-
-    class Meta:
-        model = Card
-        fields = ['id', 'rows', 'created_on']
-        depth = 1
 
     def create(self, validated_data):
         rows_data = validated_data.pop('rows')
@@ -26,4 +17,17 @@ class CardSerializer(serializers.ModelSerializer):
         return card
 
     def get_queryset(self):
-        return Card.objects.all()
+        return Row.objects.all()
+
+class CardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Card
+        fields = ['id', 'created_on']
+        depth = 1
+
+
+        """
+        So the model defines the table structure which is good,
+        so then the serializer needs to return the row
+        """

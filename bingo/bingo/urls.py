@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from play import views
+from play.views import CardList, RowList
 
 urlpatterns = [
-    path('', views.card_list, name='cards'),
-    path('rows', views.row_list, name='rows'),
+    path('cards', CardList.as_view(), name='cards'),
+    path('rows', RowList.as_view(), name='rows'),
     path('admin/', admin.site.urls),
 ]
