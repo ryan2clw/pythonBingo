@@ -23,27 +23,7 @@ class Row(models.Model):
     #card = models.ForeignKey(Card, on_delete=models.CASCADE, related_name='card')
 
     def __str__(self):
-        return self.b + "," + self.i + "," + self.n + "," + self.g + "," + self.o + ", card:"
+        return str(self.b) + "  " + str(self.i) + "  " + str(self.n) + "\
+          " + str(self.g) + "  " + str(self.o) + ", card:" + str(self.card.id)
 
-class BingoBoard(models.Model):
-    b = ArrayField(
-	    models.CharField(max_length=3),
-	    size=5
-    )
-    i = ArrayField(
-	    models.CharField(max_length=3),
-	    size=5
-    )
-    n = ArrayField(
-	    models.CharField(max_length=3),
-	    size=5
-    )
-    g = ArrayField(
-	   models.CharField(max_length=3),
-	   size=5
-    )
-    o = ArrayField(
-	   models.CharField(max_length=3),
-	   size=5
-    )
 
